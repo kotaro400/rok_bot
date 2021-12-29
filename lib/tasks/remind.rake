@@ -4,7 +4,7 @@ namespace :remind do
     first_time = Time.local(2021, 12, 6, 13, 24)
     current_time = Time.now
     remaining_second = 144000 - ((current_time - first_time) % 144000)
-    if remaining_second <= 7200
+    if remaining_second <= 3600 && remaining_second > 3000
       count = ((current_time - first_time) / 144000).ceil
       next_time = first_time + 144000 * count
       client = Line::Bot::Client.new { |config|
@@ -24,11 +24,11 @@ namespace :remind do
   end
 
   desc "暗黒の事前通知"
-  task remind_ancient_ruin: :environment do
+  task remind_dark_ruin: :environment do
     first_time = Time.local(2021, 12, 20, 1, 47)
     current_time = Time.now
     remaining_second = 309600 - ((current_time - first_time) % 309600)
-    if remaining_second <= 7200
+    if remaining_second <= 3600 && remaining_second > 3000
       count = ((current_time - first_time) / 309600).ceil
       next_time = first_time + 309600 * count
       client = Line::Bot::Client.new { |config|
