@@ -24,12 +24,15 @@ class LineBotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          message = {
-            type: 'text',
-            text: event.message['text']
-          }
-          client.reply_message(event['replyToken'], message)
+          # 後で考える
         end
+      when Line::Bot::Event::Follow 
+        userId = event['source']['userId'] 
+        User.find_or_create_by(line_uid: userId)
+      when Line::Bot::Event::Unfollow
+        userId = event['source']['userId']  
+        user = User.find_by(line_uid: userId)
+        user.destroy if user.present?
       end
     }
 
