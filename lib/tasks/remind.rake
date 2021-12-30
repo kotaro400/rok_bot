@@ -14,7 +14,7 @@ namespace :remind do
 
       message = {
         type: "text",
-        text: "太古の遺跡が【#{next_time.strftime("%H:%M")}】に開放"
+        text: "【あと#{(remaining_second / 60).floor}分】太古の遺跡が#{next_time.strftime("%H:%M")}に開放"
       }
        
       User.all.each do |user|
@@ -38,7 +38,7 @@ namespace :remind do
       
       message = {
         type: "text",
-        text: "暗黒の祭壇が【#{next_time.strftime("%H:%M")}】に開放"
+        text: "【あと#{(remaining_second / 60).floor}分】暗黒の祭壇が#{next_time.strftime("%H:%M")}に開放"
       }
        
       User.all.each do |user|

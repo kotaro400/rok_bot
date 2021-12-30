@@ -24,7 +24,11 @@ class LineBotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          # 後で考える
+          message = {
+            type: 'text',
+            text: event.message['text']
+          }
+          client.reply_message(event['replyToken'], message)
         end
       when Line::Bot::Event::Follow 
         userId = event['source']['userId'] 
